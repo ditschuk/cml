@@ -22,6 +22,27 @@ describe('Report tests', () => {
     expect(output.endsWith(` "${title}")`)).toBe(true);
   });
 
+  test('Publish video', async () => {
+    const path = './assets/logo.mp4';
+    const md = false;
+    const title = 'my title';
+
+    const output = await REPORT.publish_file({ path, md, title });
+
+    expect(output.startsWith('https://')).toBe(true);
+  });
+
+  test('Publish video md', async () => {
+    const path = './assets/logo.mp4';
+    const md = true;
+    const title = 'my title';
+
+    const output = await REPORT.publish_file({ path, md, title });
+
+    expect(output.startsWith('![](https://')).toBe(true);
+    expect(output.endsWith(` "${title}")`)).toBe(true);
+  });
+
   test('Publish file md', async () => {
     const path = './assets/logo.pdf';
     const md = true;
